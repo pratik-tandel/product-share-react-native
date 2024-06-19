@@ -6,10 +6,11 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.darkGrey,
         borderRadius: 14,
-        paddingVertical: 10,
-        paddingHorizontal: 50,
-        width: '40%',
+        padding: 16,
+        width: '45%',
         alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
         width: 30,
