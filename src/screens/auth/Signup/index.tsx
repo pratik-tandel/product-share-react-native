@@ -11,6 +11,9 @@ import GoogleLogin from '../../../components/GoogleLogin';
 
 const Signup = () => {
     const [checked, setChecked] = useState(false);
+    const onSignIn = () => {
+        console.log('sign in');
+    };
     return (
         <View style={styles.container}>
             <AuthHeader title="Sign Up" />
@@ -28,6 +31,11 @@ const Signup = () => {
             <Separator text="Or sign up with" />
 
             <GoogleLogin />
+
+            <Text style={styles.footerText}>
+                Already have an account?
+                <Text onPress={onSignIn} style={styles.footerLink}> Sign In</Text>
+            </Text>
         </View>
     );
 };
