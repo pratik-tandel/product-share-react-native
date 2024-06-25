@@ -8,13 +8,18 @@ import Input from '../../../components/Input';
 import Separator from '../../../components/Separator';
 import { styles } from './styles';
 
-const Signin = () => {
+const Signin = ({ navigation }: any) => {
     const onSignUp = () => {
-        console.log('sign up');
+        navigation.navigate('Signin');
     };
+
+    const onBack = () => {
+        navigation.goBack();
+    };
+
     return (
         <View style={styles.container}>
-            <AuthHeader title="Sign In" />
+            <AuthHeader onBackPress={onBack} title="Sign In" />
             <Input label="Name" placeholder="John Doe" />
             <Input label="Email" placeholder="example@gmail.com" />
             <Input isPassword label="Password" placeholder="********" />
