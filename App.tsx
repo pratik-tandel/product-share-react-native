@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './src/screens/auth/Signup';
 import Splash from './src/screens/auth/Splash';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,13 +34,15 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator>
-        <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="Signin" component={Signin} />
-        <Stack.Screen name="Signup" component={Signup} />
-      </Stack.Navigator>
-    </NavigationContainer >
+    <SafeAreaProvider>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="Signin" component={Signin} />
+          <Stack.Screen name="Signup" component={Signup} />
+        </Stack.Navigator>
+      </NavigationContainer >
+    </SafeAreaProvider>
   );
 }
 
