@@ -8,10 +8,27 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './src/screens/auth/Signup';
 import Splash from './src/screens/auth/Splash';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from './src/screens/app/Home';
+import Favorites from './src/screens/app/Favorites';
+import Profile from './src/screens/app/Profile';
+import Settings from './src/screens/app/Settings';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const Tabs = () => (
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={Home} />
+    <Tab.Screen name="Favorites" component={Favorites} />
+    <Tab.Screen name="Profile" component={Profile} />
+    <Tab.Screen name="Settings" component={Settings} />
+  </Tab.Navigator>
+);
 
 function App(): React.JSX.Element {
+  const isSignedIn = false;
+
   useEffect(() => {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -37,12 +54,20 @@ function App(): React.JSX.Element {
     <SafeAreaProvider>
       <NavigationContainer theme={theme}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="Signin" component={Signin} />
-          <Stack.Screen name="Signup" component={Signup} />
+          {
+            isSignedIn ? (
+              <Stack.Screen name="Tabs" component={Tabs} />
+            ) : (
+              <>
+                <Stack.Screen name="Splash" component={Splash} />
+                <Stack.Screen name="Signin" component={Signin} />
+                <Stack.Screen name="Signup" component={Signup} />
+              </>
+            )
+          }
         </Stack.Navigator>
       </NavigationContainer >
-    </SafeAreaProvider>
+    </SafeAreaProvider >
   );
 }
 
