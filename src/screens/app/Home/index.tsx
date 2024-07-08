@@ -10,16 +10,23 @@ import { styles } from './styles';
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState();
+    const [keyword, setKeyword] = useState('');
     const [filteredProducts, setFilteredProducts] = useState(products);
 
     useEffect(() => {
-        if (selectedCategory) {
+        if (selectedCategory && !keyword) {
             const updatedProducts = products.filter((product) => product?.category === selectedCategory);
             setFilteredProducts(updatedProducts);
-        } else {
+        } else if (selectedCategory && keyword) {
+            const updatedProducts = products.filter((product) => product?.category === selectedCategory && product?.title?.toLowerCase().includes(keyword?.toLowerCase()));
+            setFilteredProducts(updatedProducts);
+        } else if (!selectedCategory && keyword) {
+            const updatedProducts = products.filter((product) => product?.title?.toLowerCase().includes(keyword?.toLowerCase()));
+            setFilteredProducts(updatedProducts);
+        } else if (!selectedCategory && !keyword) {
             setFilteredProducts(products);
         }
-    }, [selectedCategory]);
+    }, [selectedCategory, keyword]);
 
     const renderCategoryItem = ({ item, index }: any) => {
         return (
@@ -41,7 +48,7 @@ const Home = () => {
 
     return (
         <SafeAreaView>
-            <Header showSearch={true} title="Find All You Need" />
+            <Header showSearch onSearch={setKeyword} keyword={keyword} title="Find All You Need" />
 
             <FlatList
                 showsHorizontalScrollIndicator={false}
