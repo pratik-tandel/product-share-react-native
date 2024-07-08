@@ -12,7 +12,7 @@ const Header = ({ title, onBackPress, onLogout, showLogout, showSearch, showBack
     };
 
     return (
-        <View>
+        <View style={styles.mainContainer}>
             <View style={styles.container}>
                 {showBack ? (
                     <Pressable hitSlop={20} onPress={onBackPress}>

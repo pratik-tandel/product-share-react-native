@@ -1,27 +1,65 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { FlatList, SafeAreaView, ScrollView, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, SafeAreaView, View } from 'react-native';
+import CategoryBox from '../../../components/CategoryBox';
 import Header from '../../../components/Header';
-import { styles } from './styles';
+import ProductHomeItem from '../../../components/ProductHomeItem';
 import { categories } from '../../../data/categories';
+import { products } from '../../../data/products';
+import { styles } from './styles';
 
 const Home = () => {
-    const renderCategoryItem = ({ item }: any) => {
+    const [selectedCategory, setSelectedCategory] = useState();
+    const [filteredProducts, setFilteredProducts] = useState(products);
+
+    useEffect(() => {
+        if (selectedCategory) {
+            const updatedProducts = products.filter((product) => product?.category === selectedCategory);
+            setFilteredProducts(updatedProducts);
+        } else {
+            setFilteredProducts(products);
+        }
+    }, [selectedCategory]);
+
+    const renderCategoryItem = ({ item, index }: any) => {
         return (
-            <Text>{item?.title}</Text>
+            <CategoryBox
+                onPress={() => setSelectedCategory(item?.id)}
+                isSelected={item?.id === selectedCategory}
+                isFirst={index === 0}
+                title={item?.title}
+                image={item?.image}
+            />
+        );
+    };
+
+    const renderProductItem = ({ item }: any) => {
+        return (
+            <ProductHomeItem {...item} />
         );
     };
 
     return (
         <SafeAreaView>
-            <ScrollView style={styles.container}>
-                <Header showSearch={true} title="Find All You Need" />
+            <Header showSearch={true} title="Find All You Need" />
 
-                <FlatList style={styles.list} data={categories} renderItem={renderCategoryItem}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal
-                />
-            </ScrollView>
+            <FlatList
+                showsHorizontalScrollIndicator={false}
+                style={styles.list}
+                data={categories}
+                renderItem={renderCategoryItem}
+                keyExtractor={(item, index) => index.toString()}
+                horizontal
+            />
+
+            <FlatList
+                style={styles.productsList}
+                numColumns={2}
+                data={filteredProducts}
+                renderItem={renderProductItem}
+                keyExtractor={(item, index) => index.toString()}
+                ListFooterComponent={<View style={{ height: 200 }} />}
+            />
         </SafeAreaView>
     );
 };
