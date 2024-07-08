@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     list: {
-        paddingVertical: 24,
+        paddingTop: 10,
+        paddingVertical: 20,
     },
     productsList: {
         paddingHorizontal: 12,

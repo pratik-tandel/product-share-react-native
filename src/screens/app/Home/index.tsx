@@ -9,7 +9,7 @@ import { products } from '../../../data/products';
 import { styles } from './styles';
 
 const Home = () => {
-    const [selectedCategory, setSelectedCategory] = useState();
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [keyword, setKeyword] = useState('');
     const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -48,7 +48,7 @@ const Home = () => {
 
     return (
         <SafeAreaView>
-            <Header showSearch onSearch={setKeyword} keyword={keyword} title="Find All You Need" />
+            <Header showSearch onSearch={(value: string) => setKeyword(value)} keyword={keyword} title="Find All You Need" />
 
             <FlatList
                 showsHorizontalScrollIndicator={false}
