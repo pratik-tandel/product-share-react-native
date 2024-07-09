@@ -15,6 +15,7 @@ import Profile from './src/screens/app/Profile';
 import Signup from './src/screens/auth/Signup';
 import Splash from './src/screens/auth/Splash';
 import { colors } from './src/utils/colors';
+import ProductDetails from './src/screens/app/ProductDetails';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,7 +84,10 @@ function App(): React.JSX.Element {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {
             isSignedIn ? (
-              <Stack.Screen name="Tabs" component={Tabs} />
+              <>
+                <Stack.Screen name="Tabs" component={Tabs} />
+                <Stack.Screen name="ProductDetails" component={ProductDetails} />
+              </>
             ) : (
               <>
                 <Stack.Screen name="Splash" component={Splash} />

@@ -8,7 +8,7 @@ import { categories } from '../../../data/categories';
 import { products } from '../../../data/products';
 import { styles } from './styles';
 
-const Home = () => {
+const Home = ({ navigation }: any) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [keyword, setKeyword] = useState('');
     const [filteredProducts, setFilteredProducts] = useState(products);
@@ -41,8 +41,12 @@ const Home = () => {
     };
 
     const renderProductItem = ({ item }: any) => {
+        const onProductPress = (product: any) => {
+            navigation.navigate('ProductDetails', { product });
+        };
+
         return (
-            <ProductHomeItem {...item} />
+            <ProductHomeItem onPress={() => onProductPress(item)} {...item} />
         );
     };
 
