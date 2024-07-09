@@ -1,14 +1,20 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { SafeAreaView, ScrollView, Text } from 'react-native';
-import { styles } from './styles';
+import { FlatList, SafeAreaView } from 'react-native';
+import FavoriteItem from '../../../components/FavoriteItem';
+import Header from '../../../components/Header';
+import { products } from '../../../data/products';
 
 const Favorites = () => {
+    const renderFavorites = ({ item }: any) => {
+        return (
+            <FavoriteItem {...item} />
+        );
+    };
     return (
         <SafeAreaView>
-            <ScrollView style={styles.container}>
-                <Text>Favorites</Text>
-            </ScrollView>
+            <Header title="Favorites" />
+            <FlatList data={products} renderItem={renderFavorites} keyExtractor={(item) => String(item?.id)} />
         </SafeAreaView>
     );
 };
