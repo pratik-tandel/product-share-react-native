@@ -11,7 +11,7 @@ import { styles } from './styles';
 
 const Signin = ({ navigation }: any) => {
     const onSignUp = () => {
-        navigation.navigate('Signin');
+        navigation.navigate('SignUp');
     };
 
     const onBack = () => {
@@ -22,7 +22,6 @@ const Signin = ({ navigation }: any) => {
         <SafeAreaView>
             <ScrollView style={styles.container}>
                 <AuthHeader onBackPress={onBack} title="Sign In" />
-                <Input label="Name" placeholder="John Doe" />
                 <Input label="Email" placeholder="example@gmail.com" />
                 <Input isPassword label="Password" placeholder="********" />
 

@@ -8,11 +8,11 @@ const Splash = ({ navigation }: any) => {
     console.log(navigation);
 
     const onSignup = () => {
-        navigation.navigate('Signup');
+        navigation.navigate('SignUp');
     };
 
     const onSignin = () => {
-        navigation.navigate('Signin');
+        navigation.navigate('SignIn');
     };
 
     return (

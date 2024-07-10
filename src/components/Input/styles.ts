@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingRight: 20,
+        marginBottom: 10,
     },
     input: {
         paddingHorizontal: 16,

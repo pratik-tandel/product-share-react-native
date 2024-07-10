@@ -55,7 +55,7 @@ const Tabs = () => (
 );
 
 function App(): React.JSX.Element {
-  const isSignedIn = true;
+  const isSignedIn = false;
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -91,8 +91,8 @@ function App(): React.JSX.Element {
             ) : (
               <>
                 <Stack.Screen name="Splash" component={Splash} />
-                <Stack.Screen name="Signin" component={Signin} />
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="SignIn" component={Signin} />
+                <Stack.Screen name="SignUp" component={Signup} />
               </>
             )
           }
